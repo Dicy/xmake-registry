@@ -44,7 +44,7 @@ package("chromium-embedded-framework")
 
     on_install("macosx", function (package)
         local distrib_type = package:debug() and "Debug" or "Release"
-        os.cp(distrib_type, package:installdir("bin"))
+        os.cp(path.join(distrib_type, "*"), package:installdir("bin"))
         os.cp(path.join(package:scriptdir(), "port", "xmake.lua"), "xmake.lua")
         import("package.tools.xmake").install(package)
     end)
