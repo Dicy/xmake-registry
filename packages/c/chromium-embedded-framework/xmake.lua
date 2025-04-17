@@ -5,7 +5,7 @@ package("chromium-embedded-framework")
     set_license("BSD-3-Clause")
 
     local buildver = {
-        ["134.3.2"] = "134.3.2+g615db2f+chromium-134.0.6998.89"
+        ["135.0.21"] = "135.0.21+gd008a99+chromium-135.0.7049.96"
     }
   
     if is_plat("windows") then
@@ -13,7 +13,7 @@ package("chromium-embedded-framework")
             return format("%s_windows%s", buildver[tostring(version)], (is_arch("x64") and "64" or "32"))
         end})
         if is_arch("x64") then
-            add_versions("134.3.2", "856cccd8f8b7ebd4cabad7a7ce1bd7596c18bba641bb0f2eae4d3ee51b3c7265")
+            add_versions("135.0.21", "af85614db3460aa497acf2124581ede227a013c00c62b61ccb2367644230e4e6")
         end
         add_configs("runtime", {description = "Set vs compiler runtime.", default = "MT", type = "string", readonly = true})
     elseif is_plat("macosx") then
@@ -21,7 +21,7 @@ package("chromium-embedded-framework")
             return format("%s_macos%s", buildver[tostring(version)], (is_arch("x64") and "x64" or "arm64"))
         end})
         if is_arch("arm64") then
-            add_versions("134.3.2", "dd6551579493ee203d70ddaccc243c87cd5151f956e49203925992adfd3c3dcd")
+            add_versions("135.0.21", "d8bb1f11882d1f50fd5c1b37a4ae8de070fa64f3cfea3993af7364bbb68ce1c1")
         end
     end
 
