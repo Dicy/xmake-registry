@@ -15,6 +15,7 @@ package("chromium-embedded-framework")
         if is_arch("x64") then
             add_versions("135.0.21", "af85614db3460aa497acf2124581ede227a013c00c62b61ccb2367644230e4e6")
         end
+        add_configs("vs_runtime", {description = "Set vs compiler runtime.", default = "MT", type = "string", readonly = true})
     elseif is_plat("macosx") then
         add_urls("https://cef-builds.spotifycdn.com/cef_binary_$(version).tar.bz2", {version = function (version)
             return format("%s_macos%s", buildver[tostring(version)], (is_arch("x64") and "x64" or "arm64"))
@@ -23,6 +24,8 @@ package("chromium-embedded-framework")
             add_versions("135.0.21", "d8bb1f11882d1f50fd5c1b37a4ae8de070fa64f3cfea3993af7364bbb68ce1c1")
         end
     end
+
+    add_configs("shared", {description = "Build shared library.", default = true, type = "boolean", readonly = true})
 
     if is_plat("windows") then
         add_syslinks("user32", "advapi32", "shlwapi", "comctl32", "rpcrt4")
@@ -48,5 +51,5 @@ package("chromium-embedded-framework")
     end)
 
     on_test(function (package)
---         assert(package:has_cxxfuncs("CefInitialize", {includes = "cef_app.h", configs = {languages = "c++17"}}))
+        assert(package:has_cxxfuncs("CefInitialize", {includes = "cef_app.h", configs = {languages = "c++17"}}))
     end)
