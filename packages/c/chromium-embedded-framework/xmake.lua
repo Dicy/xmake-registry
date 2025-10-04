@@ -33,7 +33,7 @@ package("chromium-embedded-framework")
     add_includedirs(".", "include")
 
     on_install("windows", function (package)
-        local distrib_type = package:debug() and "Debug" or "Release"
+        local distrib_type = package:is_debug() and "Debug" or "Release"
         os.cp(path.join(distrib_type, "*.lib"), package:installdir("lib"))
         os.cp(path.join(distrib_type, "*.dll"), package:installdir("bin"))
         os.cp(path.join(distrib_type, "*.bin"), package:installdir("bin"))
@@ -44,7 +44,7 @@ package("chromium-embedded-framework")
     end)
 
     on_install("macosx", function (package)
-        local distrib_type = package:debug() and "Debug" or "Release"
+        local distrib_type = package:is_debug() and "Debug" or "Release"
         os.cp(path.join(distrib_type, "*"), package:installdir("bin"))
         os.cp(path.join(package:scriptdir(), "port", "xmake.lua"), "xmake.lua")
         import("package.tools.xmake").install(package)
