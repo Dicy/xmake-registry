@@ -144,6 +144,10 @@ package("assimp-alternative")
             if minizip and not minizip:is_system() then
                 packagedeps = table.join2(packagedeps or {}, "minizip")
             end
+            local bzip2 = package:dep("bzip2")
+            if bzip2 and not bzip2:is_system() then
+                packagedeps = table.join2(packagedeps or {}, "bzip2")
+            end
             -- fix ninja debug build
             os.mkdir(path.join(package:buildir(), "code/pdb"))
             -- MDd == _DEBUG + _MT + _DLL
